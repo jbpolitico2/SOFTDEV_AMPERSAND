@@ -39,7 +39,10 @@ public class Login extends AppCompatActivity {
     EditText UsernameEt, PasswordEt;
     TextView RegisterET;
     Connection conn;
-
+    String type;
+    public static String id;
+    String username;
+    String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,8 @@ public class Login extends AppCompatActivity {
         }
         else
        {
+           username = UsernameEt.getText().toString();
+           password = PasswordEt.getText().toString();
            CheckLogin checkLogin = new CheckLogin();
            checkLogin.execute("");
            PasswordEt.setText("");
@@ -90,7 +95,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public class CheckLogin extends AsyncTask<String,String,String>{
+    public class CheckLogin extends AsyncTask<String,String,String> {
 
         String z = "";
         Boolean isSuccess = false;
@@ -103,62 +108,63 @@ public class Login extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String r) {
-            Toast.makeText(Login.this,r,Toast.LENGTH_SHORT).show();
-            if (isSuccess){
-                Toast.makeText(Login.this,"login success",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Login.this, r, Toast.LENGTH_SHORT).show();
+            if (isSuccess) {
+                if (type.equals("student")){
+                    Toast.makeText(Login.this, "Hello Buddy!", Toast.LENGTH_SHORT).show();
+                    Intent welcome = new Intent(Login.this, MainPage.class);
+                    welcome.putExtra("type", type);
+                    startActivity(welcome);
+                }
+                else{
+                    Toast.makeText(Login.this, "Good Day Coach!", Toast.LENGTH_SHORT).show();
+                    Intent welcome = new Intent(Login.this, MainPage.class);
+                    welcome.putExtra("type", type);
+                    startActivity(welcome);
+                }
 
             } else {
-                Toast.makeText(Login.this,"login failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, password + username, Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
-        protected String doInBackground(String... params)
-        {
-            try
-            {
+        protected String doInBackground(String... params) {
+
+            try {
                 conn = connectionclass();
 
-                if (conn == null){
+                if (conn == null) {
                     z = "Check Your Internet Access!";
-                }else{
-                    String username = UsernameEt.getText().toString();
-                    String password = PasswordEt.getText().toString();
-                    String query = "select * from STUDENT_INFO where username like '" + username + "' and password like '" + password + "';";
+                } else {
+                    String query = "SELECT *, type = 'student' from STUDENT_INFO where password = '" + password + "' AND username = '" + username + "'  UNION ALL SELECT *, type = 'coach' FROM COACH_INFO where password = '" + password + "' AND username = '" + username + "'";
                     Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
-                    if (rs.next()){
-                        z = "student";
+                    if (rs.next()) {
+                        type = rs.getString("type");
+                        id = rs.getString("id");
+                     // z = "Query Successful";
                         isSuccess = true;
                         conn.close();
 
                     } else {
+                      //z = "invalid query";
                         isSuccess = false;
-                        query = "select * from COACH_INFO where username like '" + username + "' and password like '" + password + "';";
-                        stmt = conn.createStatement();
-                        rs = stmt.executeQuery(query);
 
-                        if (rs.next()){
-                            z = "coach";
-                            isSuccess = true;
-                            conn.close();
 
-                        } else
-                        {   z = "invalid query";
-                            isSuccess = false;
-
-                        }
                     }
 
                 }
-
-            } catch (Exception ex) {
-                isSuccess =false;
-                z=ex.getMessage();
-                Log.d("sql error",z);
             }
-            return z;
+
+             catch(Exception ex){
+                    isSuccess = false;
+                   //z = ex.getMessage();
+                    Log.d("sql error", z);
+                }
+                return z;
+
 
         }
     }
@@ -190,7 +196,10 @@ public class Login extends AppCompatActivity {
         return connection;
     }
 
-
+    public static String getVariable()
+    {
+        return id;
+    }
 
 
 
