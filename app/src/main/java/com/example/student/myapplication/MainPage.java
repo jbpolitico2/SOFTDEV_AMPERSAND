@@ -1,9 +1,11 @@
 package com.example.student.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -12,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +22,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainPage extends AppCompatActivity {
-    CoachActivityAdapter contactAdapterf;
+
     ListView exerciselist;
-    static int type;
+    static String type;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * {@link FragmentPagerAdapter} derivative, which will keep every
@@ -60,21 +63,14 @@ public class MainPage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent welcome = new Intent(MainPage.this, AddActivity.class);
+                startActivity(welcome);
             }
         });
 
 
         Bundle bundle = getIntent().getExtras();
-        type = bundle.getInt("type");
-        if (type == 1) {
-
-        }
-        else if (type == 2){
-
-
-        }
+        type = bundle.getString("type");
 
     }
 
@@ -95,10 +91,31 @@ public class MainPage extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this,Login.class);
-            startActivity(intent);
-            Toast.makeText(this,"Successfully log-out!",Toast.LENGTH_SHORT).show();
-            finish();
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainPage.this);
+            builder1.setTitle("Logout");
+            builder1.setMessage("Do you wish to Logout?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(MainPage.this,Login.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
             return true;
         }
 
@@ -120,7 +137,7 @@ public class MainPage extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
 
-            if (type == 2) {
+            if (type.equals("coach")) {
                 switch (position) {
                     case 0:
                         CoachHome coachHome = new CoachHome();
@@ -136,7 +153,7 @@ public class MainPage extends AppCompatActivity {
 
                 }
 
-            } else if (type == 1) {
+            } else if (type.equals("student")) {
                 switch (position) {
                     case 0:
                         StudentHome StudentHome = new StudentHome();
@@ -161,6 +178,37 @@ public class MainPage extends AppCompatActivity {
             return 3;
         }
 
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainPage.this);
+        builder1.setTitle("Logout");
+        builder1.setMessage("Do you wish to Logout?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(MainPage.this,Login.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
 
     }
 
