@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
     tools:context=".AddActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="#d8ecf9"
+        android:textColor="#000"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/activity" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_height="100dp"
+        android:background="#d8ecf9"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:id="@+id/activityDesc"
+            android:textColor="#000"
+            android:hint="Activity Description"
+            android:layout_marginBottom="10dp"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_height="wrap_content"
+        android:background="#d8ecf9"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:textColor="#000"
+            android:hint="Time"
+            android:layout_marginBottom="10dp"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_height="wrap_content"
+        android:background="#d8ecf9"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:hint="Date"
+            android:textColor="#000"
+            android:layout_marginBottom="10dp"/>
+    </android.support.design.widget.TextInputLayout>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="#d8ecf9"
+        android:textColor="#000"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/section" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#d8ecf9"
+        android:layout_marginRight="10dp"
+        android:textColor="#000"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/team" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:id="@+id/submit"
+        android:text="Submit"
+        android:layout_gravity="center"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:id="@+id/cancel"
+        android:text="Cancel"
+        android:layout_gravity="center"/>
+
+
+
+</LinearLayout>
