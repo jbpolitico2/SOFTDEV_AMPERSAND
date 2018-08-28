@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="10dp"
+
     tools:context=".MainPage$PlaceholderFragment"
     >
 
@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:background="@color/colorPrimary"
         android:paddingBottom="5dp">
         <ImageView
             android:layout_width="100dp"
@@ -32,9 +33,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:id="@+id/name"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:text="Name"
                 android:layout_marginBottom="3dp"/>
             <TextView
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
                 android:text="ID"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:id="@+id/id"/>
         </LinearLayout>
 
@@ -56,59 +57,52 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom"
-        android:padding="5dp"
+        android:padding="15dp"
+        android:background="@color/colorPrimary"
         android:layout_marginBottom="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
-
-
-            <LinearLayout
-                android:layout_width="170dp"
+            android:layout_marginRight="20dp">
+            <TextView
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:textColor="#000"
-                    android:text="Section: "
-                    android:layout_marginBottom="3dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:textColor="#000"
-                    android:text="section"
-                    android:id="@+id/section"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="170dp"
+                android:textSize="10dp"
+                android:textColor="#fff"
+                android:text="Section: "
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:textColor="#000"
-                    android:text="Team: "
-                    android:layout_marginBottom="3dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:textColor="#000"
-                    android:text="Team"
-                    android:id="@+id/team"
-                    />
-            </LinearLayout>
-
+                android:textSize="15dp"
+                android:textColor="#fff"
+                android:text="No current section assign"
+                android:id="@+id/section"
+                />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:textColor="#fff"
+                android:text="Team: "
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="#fff"
+                android:text="Team"
+                android:id="@+id/team"
+                />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,17 +110,17 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:text="Contact: "
                 android:layout_marginBottom="3dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:text="section"
                 android:id="@+id/contact"
                 />
@@ -137,18 +131,18 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
                 android:text="Email: "
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:layout_marginBottom="3dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
                 android:text="section"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:id="@+id/email" />
         </LinearLayout>
 
@@ -156,17 +150,27 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Daily Activity"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:gravity="center"
         android:background="#2321"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:textColor="#000"/>
 
     <ListView
+        android:id="@+id/exerciselist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dailyActivity"></ListView>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:background="#fff"
+        android:clickable="true"
+        android:divider="#E3ff"
+        android:dividerHeight="1dp">
+
+    </ListView>
 
 
 </LinearLayout>

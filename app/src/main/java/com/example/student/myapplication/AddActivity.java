@@ -380,6 +380,7 @@ public class AddActivity extends AppCompatActivity {
         protected void onPostExecute(String r) {
           Toast.makeText(AddActivity.this, r, Toast.LENGTH_SHORT).show();
             if (isSuccess){
+                Toast.makeText(AddActivity.this, "Activity Successfully Added!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
@@ -396,28 +397,19 @@ public class AddActivity extends AppCompatActivity {
                     String query = "INSERT INTO ACTIVITY_RECORD (activity,activity_desc,coach_id,time,date,section) VALUES('" + factivity + "','" + factivityDesc + "','" + fcoachID + "','" + ftime + "','"  + fdate + "','" + fsection + "')";
                     Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
-
-                    if (rs.next()) {
-                       z = "Activity Successfully Added!";
                         isSuccess = true;
                         conn.close();
 
-                    } else {
-                        z = "invalid query";
-                        isSuccess = false;
-
-
-                    }
 
                 }
             }
 
             catch(Exception ex){
-                isSuccess = false;
-                z = ex.getMessage();
-                Log.d("sql error", z);
+                isSuccess = true;
+                //z = ex.getMessage();
+               // Log.d("sql error", z);
             }
-            return z;
+            return null;
 
 
         }

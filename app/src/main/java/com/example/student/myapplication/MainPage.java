@@ -59,18 +59,26 @@ public class MainPage extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        Bundle bundle = getIntent().getExtras();
+        type = bundle.getString("type");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent welcome = new Intent(MainPage.this, AddActivity.class);
-                startActivity(welcome);
+
+                if (type.equals("coach")){
+
+                    Intent welcome = new Intent(MainPage.this, AddActivity.class);
+                    startActivity(welcome);
+                }
+                else { Toast.makeText(MainPage.this,"Sorry Buddy! You're cannot assign activity",Toast.LENGTH_SHORT).show();}
+
             }
         });
 
 
-        Bundle bundle = getIntent().getExtras();
-        type = bundle.getString("type");
+
 
     }
 

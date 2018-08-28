@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,19 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -39,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentExercise extends Fragment{
-    private ArrayList<CoachListActivity> itemArrayList;
+    private ArrayList<ListActivity> itemArrayList;
     private MyAppAdapter myAppAdapter;
     private ListView listView;
     private boolean success = false;
@@ -49,7 +35,7 @@ public class StudentExercise extends Fragment{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.stud_exercise, container, false);
         listView = (ListView) rootView.findViewById(R.id.exerciselist);
-        itemArrayList = new ArrayList<CoachListActivity>();
+        itemArrayList = new ArrayList<ListActivity>();
         SyncData orderData = new SyncData();
         orderData.execute("");
         return rootView;
@@ -101,7 +87,7 @@ public class StudentExercise extends Fragment{
                         while (rs.next()){
 
                             try {
-                                itemArrayList.add(new CoachListActivity(rs.getString("activity"),rs.getString("activity_desc")));
+                                itemArrayList.add(new ListActivity(rs.getString("activity"),rs.getString("activity_desc")));
                             } catch (Exception ex){
                                 ex.printStackTrace();
                             }
@@ -125,7 +111,7 @@ public class StudentExercise extends Fragment{
              //   msg = writer.toString();
                 success = false;
             }
-            return msg;
+            return null;
 
         }
     }
@@ -166,16 +152,16 @@ public class StudentExercise extends Fragment{
             TextView textActivityDesc;
         }
 
-        public List<CoachListActivity> parkingList;
+        public List<ListActivity> parkingList;
 
         public Context context;
-        ArrayList<CoachListActivity> arrayList;
+        ArrayList<ListActivity> arrayList;
 
-        private MyAppAdapter (List<CoachListActivity> apps, Context context){
+        private MyAppAdapter (List<ListActivity> apps, Context context){
 
             this.parkingList = apps;
             this.context =context;
-            arrayList = new ArrayList<CoachListActivity>();
+            arrayList = new ArrayList<ListActivity>();
             arrayList.addAll(parkingList);
         }
 
